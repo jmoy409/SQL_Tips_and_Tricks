@@ -31,6 +31,7 @@ where NVL(SUBSTR(label, 0, INSTR(label, '/')-1), label)='311002174918536';
 
 
 --Select case allows to perform an if else statement logic within sql
+--general example
 select case 
 when trunc(sysdate) + 1 = to_date('17-JUL-2019', 'DD-MON-YYYY') then 1
 when trunc(sysdate) + 1 = to_date('19-JUL-2019', 'DD-MON-YYYY') then 2
@@ -40,7 +41,7 @@ from dual;
 
 
 
-
+--practical example
 select case
 --select from beginning of string(0) to '/'
 when length(NVL(SUBSTR(label, 0, INSTR(label, '/')-1), label)) <=11 then NVL(SUBSTR(label, 0, INSTR(label, '/')-1), label)
