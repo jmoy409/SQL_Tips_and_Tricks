@@ -56,8 +56,8 @@ where length(NVL(SUBSTR(label, 0, INSTR(label, '/')-1), label))>11;
 
  select * from (
    SELECT date,
-   Total_Volume_4G,
-   groupname, NVL(SUBSTR(label, 0, INSTR(label, '/')-1), label) as label, rank() over ( partition by groupname, date order by Total_Volume_4G desc) rank_4g
+   total,
+   groupname, NVL(SUBSTR(label, 0, INSTR(label, '/')-1), label) as label, rank() over ( partition by groupname, date order by total desc) ranking
    FROM (
      WITH date_time as (
        select trunc(add_months(sysdate, -3
@@ -71,7 +71,7 @@ where length(NVL(SUBSTR(label, 0, INSTR(label, '/')-1), label))>11;
      group by trunc(date, 'MM'), groupname, NVL(SUBSTR(label, 0, INSTR(label, '/')-1), label)
    )
  )
- where rank_4g IN (1,2,3,4,5) and total_volume_4g !=0
- order by  date desc, groupname, rank_4g;
+ where ranking IN (1,2,3,4,5) and total !=0
+ order by  date desc, groupname, ranking;
  
  
