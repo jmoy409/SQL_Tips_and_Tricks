@@ -1,0 +1,2 @@
+select a.date, a.groupname, a.*
+FROM table_name a
